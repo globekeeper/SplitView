@@ -10,6 +10,8 @@ import SwiftUI
 public struct SplitConstraints {
     /// The minimum fraction that the primary view will be constrained within. A value of `nil` means unconstrained.
     var minPFraction: CGFloat?
+    /// The minimum fraction that the primary view will be constrained within. A value of `nil` means unconstrained.
+    var maxPFraction: CGFloat?
     /// The minimum fraction that the secondary view will be constrained within. A value of `nil` means unconstrained.
     var minSFraction: CGFloat?
     /// The side that should have sizing priority (i.e., stay fixed) as the containing view is resized. A value of `nil` means the fraction remains unchanged.
@@ -19,8 +21,9 @@ public struct SplitConstraints {
     /// Whether to hide the secondary side when dragging stops past minSFraction
     var dragToHideS: Bool
     
-    public init(minPFraction: CGFloat? = nil, minSFraction: CGFloat? = nil, priority: SplitSide? = nil, dragToHideP: Bool = false, dragToHideS: Bool = false) {
+    public init(minPFraction: CGFloat? = nil, maxPFraction: CGFloat? = nil, minSFraction: CGFloat? = nil, priority: SplitSide? = nil, dragToHideP: Bool = false, dragToHideS: Bool = false) {
         self.minPFraction = minPFraction
+        self.maxPFraction = maxPFraction
         self.minSFraction = minSFraction
         self.priority = priority
         // Note: minPFraction/minSFraction must be specified if dragToHideP/dragToHideS is true,

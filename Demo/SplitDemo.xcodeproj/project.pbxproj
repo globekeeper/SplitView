@@ -11,7 +11,6 @@
 		AAD5CF7529956D1C00F94B1D /* DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD5CF7429956D1C00F94B1D /* DemoApp.swift */; };
 		AAD5CF7729956D1D00F94B1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAD5CF7629956D1D00F94B1D /* Assets.xcassets */; };
 		AAD5CF7A29956D1D00F94B1D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAD5CF7929956D1D00F94B1D /* Preview Assets.xcassets */; };
-		AAD5CF8229956D8500F94B1D /* SplitView in Frameworks */ = {isa = PBXBuildFile; productRef = AAD5CF8129956D8500F94B1D /* SplitView */; };
 		AAF9E0C62996F5CE00EDD306 /* DemoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF9E0C52996F5CE00EDD306 /* DemoModel.swift */; };
 		AAF9E0C82996F80900EDD306 /* DemoToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF9E0C72996F80900EDD306 /* DemoToolbar.swift */; };
 		AAF9E0CA2996F85A00EDD306 /* DemoSplitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF9E0C92996F85A00EDD306 /* DemoSplitter.swift */; };
@@ -35,7 +34,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAD5CF8229956D8500F94B1D /* SplitView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,7 +97,6 @@
 			);
 			name = SplitDemo;
 			packageProductDependencies = (
-				AAD5CF8129956D8500F94B1D /* SplitView */,
 			);
 			productName = Example;
 			productReference = AAD5CF6F29956D1C00F94B1D /* SplitDemo.app */;
@@ -130,7 +127,6 @@
 			);
 			mainGroup = AAD5CF6629956D1C00F94B1D;
 			packageReferences = (
-				AAD5CF8029956D8500F94B1D /* XCRemoteSwiftPackageReference "SplitView" */,
 			);
 			productRefGroup = AAD5CF7029956D1C00F94B1D /* Products */;
 			projectDirPath = "";
@@ -385,25 +381,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		AAD5CF8029956D8500F94B1D /* XCRemoteSwiftPackageReference "SplitView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/stevengharris/SplitView.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		AAD5CF8129956D8500F94B1D /* SplitView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AAD5CF8029956D8500F94B1D /* XCRemoteSwiftPackageReference "SplitView" */;
-			productName = SplitView;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AAD5CF6729956D1C00F94B1D /* Project object */;
 }

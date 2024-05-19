@@ -29,6 +29,8 @@ public struct Split<P: View, D: SplitDivider, S: View>: View {
     private let onDrag: ((CGFloat)->Void)?
     /// The minimum fraction of full width/height that `primary` can occupy
     private let minPFraction: CGFloat?
+    /// The max fraction of full width/height that `primary` can occupy
+    private let maxPFraction: CGFloat?
     /// The minimum fraction of full width/height that `secondary` can occupy
     private let minSFraction: CGFloat?
     /// Whether `primary` can be hidden by dragging beyond half of `minPFraction`
@@ -62,6 +64,7 @@ public struct Split<P: View, D: SplitDivider, S: View>: View {
             let hidePrimary = sideToHide().isPrimary || hide.side.isPrimary
             let hideSecondary = sideToHide().isSecondary || hide.side.isSecondary
             let minPLength = length * ((hidePrimary ? 0 : minPFraction) ?? 0)
+            let maxPLength = length * ((hidePrimary ? 0 : maxPFraction) ?? 0)
             let minSLength = length * ((hideSecondary ? 0 : minSFraction) ?? 0)
             let pLength = max(minPLength, pLength(in: size))
             let sLength = max(minSLength, sLength(in: size))
@@ -75,7 +78,7 @@ public struct Split<P: View, D: SplitDivider, S: View>: View {
             ZStack(alignment: .topLeading) {
                 if !hidePrimary {
                     primary
-                        .frame(width: pWidth, height: pHeight)
+                    .frame(width: pWidth, height: max(maxPLength, pHeight))
                 }
                 if !hideSecondary {
                     secondary
@@ -128,6 +131,7 @@ public struct Split<P: View, D: SplitDivider, S: View>: View {
         _fullFraction = State(initialValue: fraction.value)         // Local fraction updated during drag
         // Constants we use a lot and want to simplify access and avoid recomputing
         minPFraction = constraints.minPFraction
+        maxPFraction = constraints.maxPFraction
         minSFraction = constraints.minSFraction
         dragToHideP = constraints.minPFraction != nil && constraints.dragToHideP
         dragToHideS = constraints.minSFraction != nil && constraints.dragToHideS
@@ -330,8 +334,8 @@ public struct Split<P: View, D: SplitDivider, S: View>: View {
     }
     
     /// Return a new instance of Split with `constraints` set to a SplitConstraints holding these values.
-    public func constraints(minPFraction: CGFloat? = nil, minSFraction: CGFloat? = nil, priority: SplitSide? = nil, dragToHideP: Bool = false, dragToHideS: Bool = false) -> Split {
-        let constraints = SplitConstraints(minPFraction: minPFraction, minSFraction: minSFraction, priority: priority, dragToHideP: dragToHideP, dragToHideS: dragToHideS)
+    public func constraints(minPFraction: CGFloat? = nil, maxPFraction: CGFloat? = nil, minSFraction: CGFloat? = nil, priority: SplitSide? = nil, dragToHideP: Bool = false, dragToHideS: Bool = false) -> Split {
+      let constraints = SplitConstraints(minPFraction: minPFraction, maxPFraction: maxPFraction, minSFraction: minSFraction, priority: priority, dragToHideP: dragToHideP, dragToHideS: dragToHideS)
         return Split(layout, fraction: fraction, hide: hide, constraints: constraints, onDrag: onDrag, primary: { primary }, splitter: { splitter }, secondary: { secondary })
     }
     
@@ -339,7 +343,7 @@ public struct Split<P: View, D: SplitDivider, S: View>: View {
     ///
     /// This is a convenience method for HSplit and VSplit.
     public func constraints(_ constraints: SplitConstraints) -> Split {
-        self.constraints(minPFraction: constraints.minPFraction, minSFraction: constraints.minSFraction, priority: constraints.priority, dragToHideP: constraints.dragToHideP, dragToHideS: constraints.dragToHideS)
+      self.constraints(minPFraction: constraints.minPFraction, maxPFraction: constraints.maxPFraction, minSFraction: constraints.minSFraction, priority: constraints.priority, dragToHideP: constraints.dragToHideP, dragToHideS: constraints.dragToHideS)
     }
     
     /// Return a new instance of Split with `onDrag` set to `callback`.
